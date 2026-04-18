@@ -63,6 +63,8 @@ class OtpManager(
         return getState()
     }
 
+
+
     fun getState(): OtpState {
         return OtpState(
             otp = otpList.toList(),
@@ -70,6 +72,8 @@ class OtpManager(
             isComplete = otpList.none { it.isEmpty() }
         )
     }
+
+
 
     fun getOtp(): String {
         return otpList.joinToString("")
