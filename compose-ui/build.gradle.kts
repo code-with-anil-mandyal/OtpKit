@@ -49,19 +49,17 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
 
-    // Compose BOM (handles versions)
-    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
-    implementation("androidx.compose.runtime:runtime:1.10.6")
+    // Compose BOM
+    implementation(platform(libs.androidx.compose.bom.v20240600))
+    implementation(libs.androidx.compose.runtime)
 
     // Core UI
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.material3:material3")
+    implementation(libs.ui)
+    implementation(libs.androidx.foundation)
+    implementation(libs.material3)
 
-    // Optional but useful
-    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation(libs.androidx.ui.tooling.preview)
 
-    // Debug only
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation(libs.ui.tooling)
 
 }

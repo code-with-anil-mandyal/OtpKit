@@ -1,97 +1,124 @@
 package com.codewithanil.otpkit.compose
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.KeyboardType
-import com.core.OtpState
+import androidx.compose.ui.text.style.TextAlign
 
 
 @Composable
 fun OtpInput(
-    state: OtpState,
-    onInput: (Char) -> Unit,
-    onDelete: () -> Unit,
-    onPaste: (String) -> Unit,
+    value: String,
+    onValueChange: (String) -> Unit,
     onComplete: (String) -> Unit,
     modifier: Modifier = Modifier,
+    length: Int = 6,
     style: OtpStyle = OtpStyle(),
-    config: OtpConfig = OtpConfig(),
     isError: Boolean = false
 ) {
 
-    // Complete callback
-    LaunchedEffect(state.isComplete) {
-        if (state.isComplete) {
-            onComplete(state.otp.joinToString(""))
-        }
-    }
-
-    var textFieldValue by remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
 
     Box(modifier = modifier) {
 
+
         BasicTextField(
-            value = textFieldValue,
+            value = value,
             onValueChange = { newValue ->
 
-                if (!config.isEnabled) return@BasicTextField
+                val clean = newValue.filter { it.isDigit() }.take(length)
 
-                when {
-                    newValue.length - textFieldValue.length > 1 -> {
-                        onPaste(newValue)
-                    }
+                onValueChange(clean)
 
-                    newValue.length > textFieldValue.length -> {
-                        onInput(newValue.last())
-                    }
-
-                    newValue.length < textFieldValue.length -> {
-                        onDelete()
-                    }
+                if (clean.length == length) {
+                    onComplete(clean)
                 }
-
-                textFieldValue = state.otp.joinToString("")
             },
+            modifier = Modifier
+                .focusRequester(focusRequester)
+                .alpha(0f), // hide
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
             ),
-            modifier = Modifier
-                .matchParentSize()
-                .alpha(0f)
-                .focusRequester(focusRequester)
+            cursorBrush = SolidColor(style.textColor)
         )
 
+
         Row(
-            modifier = Modifier.clickable {
-                if (config.isEnabled) focusRequester.requestFocus()
-            },
             horizontalArrangement = Arrangement.spacedBy(style.spacing)
         ) {
 
-            state.otp.forEachIndexed { index, value ->
+            repeat(length) { index ->
 
-                OtpCell(
-                    value = value,
-                    isFocused = index == state.currentIndex,
-                    isError = isError,
-                    style = style,
-                    isMasked = config.isMasked
-                )
+                val char = value.getOrNull(index)?.toString() ?: ""
+
+                val isFocused = value.length == index
+
+                val borderColor = when {
+                    isError -> style.errorBorderColor
+                    isFocused -> style.focusedBorderColor
+                    char.isNotEmpty() -> style.filledBorderColor
+                    else -> style.emptyBorderColor
+                }
+
+                val shape = when (style.cellType) {
+                    OtpCellType.CIRCLE -> CircleShape
+                    else -> style.shape
+                }
+
+                Box(
+                    modifier = Modifier
+                        .size(style.cellSize)
+                        .clickable {
+                            focusRequester.requestFocus()
+                        }
+                        .then(
+                            when (style.cellType) {
+                                OtpCellType.LINE -> Modifier.drawBehind {
+                                    val stroke = style.borderWidth.toPx()
+                                    val y = size.height - stroke / 2
+                                    drawLine(
+                                        color = borderColor,
+                                        start = Offset(0f, y),
+                                        end = Offset(size.width, y),
+                                        strokeWidth = stroke
+                                    )
+                                }
+
+                                else -> Modifier.border(
+                                    width = style.borderWidth,
+                                    color = borderColor,
+                                    shape = shape
+                                )
+                            }
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = char,
+                        fontSize = style.textSize,
+                        color = style.textColor,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
         }
     }

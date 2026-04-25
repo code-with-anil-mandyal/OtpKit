@@ -1,40 +1,22 @@
 package com.core
 
-class OtpManager(
-    private val length: Int
-) {
+
+
+class OtpManager(private val length: Int) {
+
     private val otpList = MutableList(length) { "" }
-    private var currentIndex = 0
 
-    fun input(value: Char): OtpState {
-        if (!value.isDigit()) return getState()
-
-        if (currentIndex < length) {
-            otpList[currentIndex] = value.toString()
-            currentIndex++
+    fun setAt(index: Int, char: Char): OtpState {
+        if (index in otpList.indices) {
+            otpList[index] = char.toString()
         }
-
         return getState()
     }
 
-    fun delete(): OtpState {
-        if (currentIndex > 0) {
-            currentIndex--
-            otpList[currentIndex] = ""
+    fun clearAt(index: Int): OtpState {
+        if (index in otpList.indices) {
+            otpList[index] = ""
         }
-
-        return getState()
-    }
-
-    fun paste(value: String): OtpState {
-        val clean = value.filter { it.isDigit() }
-
-        for (char in clean) {
-            if (currentIndex >= length) break
-            otpList[currentIndex] = char.toString()
-            currentIndex++
-        }
-
         return getState()
     }
 
@@ -49,9 +31,6 @@ class OtpManager(
             }
         }
 
-        currentIndex = otpList.indexOfFirst { it.isEmpty() }
-            .let { if (it == -1) length else it }
-
         return getState()
     }
 
@@ -59,23 +38,31 @@ class OtpManager(
         for (i in otpList.indices) {
             otpList[i] = ""
         }
-        currentIndex = 0
         return getState()
     }
 
+    fun getOtp(): String = otpList.joinToString("")
 
+    fun isComplete(): Boolean = otpList.all { it.isNotEmpty() }
 
     fun getState(): OtpState {
+        val currentIndex = otpList.indexOfFirst { it.isEmpty() }
+            .let { if (it == -1) length - 1 else it }
+
         return OtpState(
             otp = otpList.toList(),
-            currentIndex = currentIndex,
-            isComplete = otpList.none { it.isEmpty() }
+            isComplete = isComplete(),
+            currentIndex = currentIndex
         )
     }
 
+    fun input(char: Char): OtpState {
+        val index = otpList.indexOfFirst { it.isEmpty() }
+        return if (index != -1) setAt(index, char) else getState()
+    }
 
-
-    fun getOtp(): String {
-        return otpList.joinToString("")
+    fun delete(): OtpState {
+        val index = otpList.indexOfLast { it.isNotEmpty() }
+        return if (index != -1) clearAt(index) else getState()
     }
 }

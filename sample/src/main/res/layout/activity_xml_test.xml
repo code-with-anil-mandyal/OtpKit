@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.codewithanil.otpkit.view.OtpView
+        android:id="@+id/otpView"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_height="wrap_content"
+        app:otpLength="6"
+        app:cellType="line"
+        app:borderColor="@android:color/darker_gray"
+        app:focusedBorderColor="@android:color/holo_blue_dark"
+        app:filledBorderColor="@android:color/black"
+        app:errorBorderColor="@android:color/holo_red_dark"
+        app:textSize="18sp"
+        app:textColor="@android:color/black"
+        app:cornerRadius="0dp"
+        app:borderWidth="2dp"
+        />
+
+    <Button
+        android:id="@+id/btnSetOtp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set OTP (987654)"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnGetOtp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get OTP"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear OTP"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btnError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Error"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

@@ -2,6 +2,6 @@ package com.core
 
 data class OtpState(
     val otp: List<String>,
-    val currentIndex: Int,
-    val isComplete: Boolean
+    val isComplete: Boolean,
+    val currentIndex: Int
 )
