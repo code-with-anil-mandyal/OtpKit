@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.codewithanil.otpkit.compose.OtpCellType
@@ -30,6 +31,8 @@ import com.codewithanil.otpkit.compose.OtpStyle
 fun OtpComposeTestScreen() {
 
     var otp by remember { mutableStateOf("") }
+    var otpBox by remember { mutableStateOf("") }
+    var otpLine by remember { mutableStateOf("") }
     var isError by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
@@ -42,6 +45,13 @@ fun OtpComposeTestScreen() {
     ) {
 
         Spacer(modifier = Modifier.height(40.dp))
+        Text(
+            text = "Circle",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
 
         OtpInput(
             value = otp,
@@ -54,7 +64,7 @@ fun OtpComposeTestScreen() {
                 Toast.makeText(context, "OTP Complete: $it", Toast.LENGTH_SHORT).show()
             },
             length = 6,
-            isError = isError,
+            isError = false,
             style = OtpStyle(
                 cellType = OtpCellType.CIRCLE,
                 emptyBorderColor = Color.Gray,
@@ -70,51 +80,157 @@ fun OtpComposeTestScreen() {
 
         Spacer(modifier = Modifier.height(30.dp))
 
-
-        Button(
-            onClick = {
-                otp = "987654"
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Set OTP (987654)")
-        }
+        Text(
+            text = "Box with Corner Radius",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
+        )
 
         Spacer(modifier = Modifier.height(10.dp))
 
-
-        Button(
-            onClick = {
-                Log.d("OTP_TEST", "Current OTP: $otp")
-                Toast.makeText(context, "OTP: $otp", Toast.LENGTH_SHORT).show()
+        OtpInput(
+            value = otpBox,
+            onValueChange = {
+                otpBox = it
+                isError = false
             },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Get OTP")
-        }
+            onComplete = {
+                Log.d("OTP_TEST", "OTP Complete: $it")
+                Toast.makeText(context, "OTP Complete: $it", Toast.LENGTH_SHORT).show()
+            },
+            length = 6,
+            isError = false,
+            style = OtpStyle(
+                cellType = OtpCellType.BOX,
+                emptyBorderColor = Color.Gray,
+                focusedBorderColor = Color.Blue,
+                filledBorderColor = Color.Black,
+                errorBorderColor = Color.Red,
+                textSize = 18.sp,
+                textColor = Color.Black,
+                borderWidth = 2.dp,
+                shape = RoundedCornerShape(10.dp)
+            )
+        )
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        Text(
+            text = "Line",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
+        )
 
         Spacer(modifier = Modifier.height(10.dp))
 
-
-        Button(
-            onClick = {
-                otp = ""
+        OtpInput(
+            value = otpLine,
+            onValueChange = {
+                otpLine = it
+                isError = false
             },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Clear OTP")
-        }
+            onComplete = {
+                Log.d("OTP_TEST", "OTP Complete: $it")
+                Toast.makeText(context, "OTP Complete: $it", Toast.LENGTH_SHORT).show()
+            },
+            length = 6,
+            isError = false,
+            style = OtpStyle(
+                cellType = OtpCellType.LINE,
+                emptyBorderColor = Color.Gray,
+                focusedBorderColor = Color.Blue,
+                filledBorderColor = Color.Black,
+                errorBorderColor = Color.Red,
+                textSize = 18.sp,
+                textColor = Color.Black,
+                borderWidth = 2.dp,
+                shape = RoundedCornerShape(10.dp)
+            )
+        )
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        Text(
+            text = "Box With Error",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
+        )
 
         Spacer(modifier = Modifier.height(10.dp))
 
-
-        Button(
-            onClick = {
+        OtpInput(
+            value = otp,
+            onValueChange = {
+                otp = it
                 isError = true
             },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Show Error")
-        }
+            onComplete = {
+                isError = true
+                Log.d("OTP_TEST", "OTP Complete: $it")
+                Toast.makeText(context, "OTP Complete: $it", Toast.LENGTH_SHORT).show()
+            },
+            length = 6,
+            isError = isError,
+            style = OtpStyle(
+                cellType = OtpCellType.BOX,
+                emptyBorderColor = Color.Gray,
+                focusedBorderColor = Color.Blue,
+                filledBorderColor = Color.Black,
+                errorBorderColor = Color.Red,
+                textSize = 18.sp,
+                textColor = Color.Black,
+                borderWidth = 2.dp,
+                shape = RoundedCornerShape(0.dp)
+            )
+        )
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+
+//        Button(
+//            onClick = {
+//                otp = "987654"
+//            },
+//            modifier = Modifier.fillMaxWidth()
+//        ) {
+//            Text("Set OTP (987654)")
+//        }
+//
+//        Spacer(modifier = Modifier.height(10.dp))
+//
+//
+//        Button(
+//            onClick = {
+//                Log.d("OTP_TEST", "Current OTP: $otp")
+//                Toast.makeText(context, "OTP: $otp", Toast.LENGTH_SHORT).show()
+//            },
+//            modifier = Modifier.fillMaxWidth()
+//        ) {
+//            Text("Get OTP")
+//        }
+//
+//        Spacer(modifier = Modifier.height(10.dp))
+//
+//
+//        Button(
+//            onClick = {
+//                otp = ""
+//            },
+//            modifier = Modifier.fillMaxWidth()
+//        ) {
+//            Text("Clear OTP")
+//        }
+//
+//        Spacer(modifier = Modifier.height(10.dp))
+//
+//
+//        Button(
+//            onClick = {
+//                isError = true
+//            },
+//            modifier = Modifier.fillMaxWidth()
+//        ) {
+//            Text("Show Error")
+//        }
     }
 }
