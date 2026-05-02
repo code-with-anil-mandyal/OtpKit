@@ -100,6 +100,7 @@ class OtpView @JvmOverloads constructor(
             setBackgroundColor(Color.TRANSPARENT)
             backgroundTintList = null
 
+            highlightColor = Color.TRANSPARENT
 
             background = createBackground(false, false, false)
 
@@ -132,6 +133,9 @@ class OtpView @JvmOverloads constructor(
             inputType = InputType.TYPE_CLASS_NUMBER
             filters = arrayOf(InputFilter.LengthFilter(1))
             background = null
+            backgroundTintList = null
+
+            highlightColor = Color.TRANSPARENT
 
             setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePx)
             setTextColor(textColor)
@@ -253,6 +257,8 @@ class OtpView @JvmOverloads constructor(
             shape = if (cellType == 1) GradientDrawable.OVAL else GradientDrawable.RECTANGLE
             setStroke(borderWidth, color)
             cornerRadius = this@OtpView.cornerRadius
+
+            setColor(Color.TRANSPARENT)
         }
     }
 

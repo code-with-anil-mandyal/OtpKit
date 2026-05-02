@@ -10,7 +10,7 @@ plugins {
 }
 
 subprojects {
-    group = "com.github.code-with-anil-mandyal.otpkit"
-    version = "v0.1.9"
+    group = property("GROUP") as String
+    version = property("VERSION_NAME") as String
 }
 

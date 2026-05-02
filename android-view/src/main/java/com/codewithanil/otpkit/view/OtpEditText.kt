@@ -1,10 +1,12 @@
 package com.codewithanil.otpkit.view
 
+import android.annotation.SuppressLint
 import android.content.ClipboardManager
 import android.content.Context
-import androidx.appcompat.widget.AppCompatEditText
+import android.widget.EditText
 
-class OtpEditText(context: Context) : AppCompatEditText(context) {
+@SuppressLint("AppCompatCustomView")
+class OtpEditText(context: Context) : EditText(context) {
 
     var onPaste: ((String) -> Unit)? = null
 
