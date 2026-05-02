@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "com.codewithanil.otpkit"
 
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.sample"
