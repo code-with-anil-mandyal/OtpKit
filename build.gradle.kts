@@ -9,3 +9,8 @@ plugins {
     kotlin("android") version "1.9.24" apply false
 }
 
+subprojects {
+    group = "com.github.code-with-anil-mandyal.otpkit"
+    version = "v0.1.9"
+}
+
