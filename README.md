@@ -22,6 +22,7 @@ Supports both **XML View** and **Jetpack Compose**, with multiple UI styles and 
 * Handles paste correctly (rare in libraries)
 * Works with autofill
 * Same API for XML and Compose
+* Works with any Android theme (no AppCompat dependency in View layer)
 
 ---
 
@@ -63,7 +64,7 @@ dependencyResolutionManagement {
 
 ```gradle
 dependencies {
-    implementation("com.github.code-with-anil-mandyal:otpkit:v0.1.7")
+    implementation("com.github.code-with-anil-mandyal:otpkit:v0.2.0")
 }
 ```
 
@@ -176,6 +177,25 @@ OtpInput(
 * ✔ Backspace behaves correctly
 * ✔ No duplicate callbacks on complete
 * ✔ Works with autofill
+
+---
+
+🧩 Theme & Activity Compatibility
+
+OtpKit is designed to be theme-independent at the View level.
+
+XML View
+Works with any theme when used with Activity
+Works with AppCompat / Material themes when used with AppCompatActivity
+
+⚠️ Note:
+AppCompatActivity requires an AppCompat or Material theme by Android design.
+This is not a limitation of OtpKit.
+
+Compose
+Works with any theme
+Works with any Activity
+No AppCompat dependency
 
 ---
 
