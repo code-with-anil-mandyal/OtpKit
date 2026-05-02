@@ -1,8 +1,25 @@
+# 🔐 OtpKit
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Platform](https://img.shields.io/badge/platform-Android-green.svg)
+![Compose](https://img.shields.io/badge/Jetpack-Compose-blue.svg)
+
+---
+
 # 🔐 OtpKit – Android OTP Input Library (XML + Compose)
 
 A lightweight and customizable OTP (One-Time Password) input library for Android.
 
 Supports both **XML View** and **Jetpack Compose**, with multiple UI styles and full input handling (typing, delete, paste, autofill).
+
+---
+
+## ❓ Why OtpKit?
+
+* No shifting bugs while editing OTP
+* Handles paste correctly (rare in libraries)
+* Works with autofill
+* Same API for XML and Compose
 
 ---
 
@@ -27,8 +44,6 @@ Supports both **XML View** and **Jetpack Compose**, with multiple UI styles and 
 # 📦 Installation
 
 ### 1️⃣ Add JitPack repository
-
-**settings.gradle / settings.gradle.kts**
 
 ```kotlin
 dependencyResolutionManagement {
@@ -95,6 +110,10 @@ otpView.setOnOtpCompleteListener { otp ->
 # 🧩 Jetpack Compose Usage
 
 ```kotlin
+import com.codewithanil.otpkit.compose.OtpInput
+import com.codewithanil.otpkit.compose.OtpStyle
+import com.codewithanil.otpkit.compose.OtpCellType
+
 var otp by remember { mutableStateOf("") }
 
 OtpInput(
@@ -174,28 +193,8 @@ Feel free to open issues or submit pull requests.
 
 # 📄 License
 
-MIT License
-
-Copyright (c) 2026 Anil Kumar
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+MIT License © 2026 Anil Kumar
+See the LICENSE file for full details.
 
 ---
 
