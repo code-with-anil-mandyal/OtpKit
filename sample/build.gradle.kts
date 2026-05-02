@@ -4,17 +4,14 @@ plugins {
 }
 
 android {
-    namespace = "com.codewithanil.otpkit.sample"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    namespace = "com.codewithanil.otpkit" // your actual package
+
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.sample"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 

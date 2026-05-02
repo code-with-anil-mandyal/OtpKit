@@ -11,11 +11,7 @@ kotlin {
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     android {
         namespace = "com.codewithanil.otpkit.core"
-        compileSdk {
-            version = release(36) {
-                minorApiLevel = 1
-            }
-        }
+        compileSdk = 34
         minSdk = 24
 
         withHostTestBuilder {

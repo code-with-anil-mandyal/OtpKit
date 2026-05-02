@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.codewithanil.otpkit.R
 import com.codewithanil.otpkit.view.OtpView
 
 class XmlTestActivity : AppCompatActivity() {
