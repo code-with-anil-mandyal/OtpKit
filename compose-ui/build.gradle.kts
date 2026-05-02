@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     id("org.jetbrains.kotlin.plugin.compose")
+    id("maven-publish")
 }
 
 android {
@@ -34,6 +35,20 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.14"
+    }
+
+    publishing {
+        singleVariant("release")
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+            }
+        }
     }
 }
 
