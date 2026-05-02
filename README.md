@@ -3,6 +3,8 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-Android-green.svg)
 ![Compose](https://img.shields.io/badge/Jetpack-Compose-blue.svg)
+[![](https://jitpack.io/v/code-with-anil-mandyal/otpkit.svg)](https://jitpack.io/#code-with-anil-mandyal/otpkit)
+
 
 ---
 
