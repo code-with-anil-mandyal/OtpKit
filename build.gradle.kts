@@ -6,5 +6,6 @@ plugins {
     alias(libs.plugins.android.kotlin.multiplatform.library) apply false
     alias(libs.plugins.android.lint) apply false
     alias(libs.plugins.android.library) apply false
+    kotlin("android") version "1.9.24" apply false
 }
 

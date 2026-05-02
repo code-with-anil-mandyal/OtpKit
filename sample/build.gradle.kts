@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.codewithanil.otpkit" // your actual package
+    namespace = "com.codewithanil.otpkit"
 
     compileSdk = 34
 
