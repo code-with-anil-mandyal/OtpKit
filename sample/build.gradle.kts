@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -35,6 +36,10 @@ android {
     buildFeatures {
         compose = true
     }
+}
+
+kotlin {
+    jvmToolchain(11)
 }
 
 dependencies {

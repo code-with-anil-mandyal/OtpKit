@@ -2,11 +2,12 @@ plugins {
     alias(libs.plugins.android.library)
     id("org.jetbrains.kotlin.plugin.compose")
     id("maven-publish")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
     namespace = "com.codewithanil.otpkit.compose"
-    compileSdk = 36
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
@@ -40,6 +41,10 @@ android {
     publishing {
         singleVariant("release")
     }
+}
+
+kotlin {
+    jvmToolchain(11)
 }
 
 afterEvaluate {

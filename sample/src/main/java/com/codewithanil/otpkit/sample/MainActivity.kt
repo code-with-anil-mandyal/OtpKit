@@ -1,17 +1,12 @@
-package com.sample
+package com.codewithanil.otpkit.sample
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.codewithanil.otpkit.sample.OtpComposeTestScreen
 
 class MainActivity : AppCompatActivity() {
 

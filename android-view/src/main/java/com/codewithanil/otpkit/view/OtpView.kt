@@ -14,8 +14,9 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
-import com.core.OtpManager
-import com.core.OtpState
+import com.codewithanil.otpkit.core.OtpManager
+import com.codewithanil.otpkit.core.OtpState
+
 
 class OtpView @JvmOverloads constructor(
     context: Context,
