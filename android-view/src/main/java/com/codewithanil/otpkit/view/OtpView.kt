@@ -205,19 +205,21 @@ class OtpView @JvmOverloads constructor(
         et.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_DEL && event.action == KeyEvent.ACTION_DOWN) {
 
-                et.text?.let {
-                    if (it.isNotEmpty()) {
-                        et.text?.clear()
-                        otpManager.clearAt(index)
-                    } else if (index > 0) {
-                        val prev = editTexts[index - 1]
-                        prev.requestFocus()
-                        prev.text?.clear()
-                        otpManager.clearAt(index - 1)
-                    }
+                val text = et.text
+                if (!text.isNullOrEmpty()) {
+                    text.clear()
+                    otpManager.clearAt(index)
+                } else if (index > 0) {
+                    val prev = editTexts[index - 1]
+                    prev.requestFocus()
+                    prev.text?.clear()
+                    otpManager.clearAt(index - 1)
                 }
+
                 true
-            } else false
+            } else {
+                false
+            }
         }
     }
 
