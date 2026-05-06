@@ -324,9 +324,20 @@ class OtpView @JvmOverloads constructor(
         onComplete = listener
     }
 
+//    private fun checkComplete(state: OtpState) {
+//        if (state.isComplete) {
+//            onComplete?.invoke(state.otp.joinToString(""))
+//        }
+//    }
+
     private fun checkComplete(state: OtpState) {
-        if (state.isComplete) {
-            onComplete?.invoke(state.otp.joinToString(""))
+
+        val otp = state.otp
+            .filter { it.isNotEmpty() }
+            .joinToString("")
+
+        if (otp.length == length) {
+            onComplete?.invoke(otp)
         }
     }
 

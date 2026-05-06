@@ -25,5 +25,5 @@ dependencyResolutionManagement {
 rootProject.name = "OtpKit"
 include(":core")
 include(":android-view")
-//include(":sample")
+include(":sample")
 include(":compose-ui")
