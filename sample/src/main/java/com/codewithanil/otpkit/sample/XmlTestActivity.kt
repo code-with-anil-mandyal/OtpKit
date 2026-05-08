@@ -30,7 +30,7 @@ class XmlTestActivity : AppCompatActivity() {
 
         // 🔥 Test setOtp()
         btnSetOtp.setOnClickListener {
-            otpView.setOtp("987654")
+            otpView.setOtp("987643")
         }
 
         // 🔥 Test getOtp()

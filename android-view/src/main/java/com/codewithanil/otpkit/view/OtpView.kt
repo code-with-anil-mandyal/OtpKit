@@ -267,26 +267,22 @@ class OtpView @JvmOverloads constructor(
 
     // ---------------- PASTE ----------------
 
-    private fun handlePaste(value: String) {
 
-        val clean = value.filter { it.isDigit() }
 
-        isInternalUpdate = true
+    private fun handlePaste(otp: String) {
 
-        otpManager.clear()
-        editTexts.forEach { it.text?.clear() }
+        val state = otpManager.setOtp(
+            otp.filter { it.isDigit() }
+                .take(length)
+        )
 
-        val state = otpManager.setOtp(clean)
+        state.otp.forEachIndexed { index, value ->
 
-        state.otp.forEachIndexed { i, c ->
-            editTexts[i].setText(c)
-            updateUI(editTexts[i], i, false)
+            if (index < editTexts.size) {
+
+                editTexts[index].setText(value)
+            }
         }
-
-        isInternalUpdate = false
-
-        val last = state.otp.indexOfLast { it.isNotEmpty() }
-        if (last >= 0) editTexts[last].requestFocus()
 
         checkComplete(state)
     }
@@ -324,11 +320,7 @@ class OtpView @JvmOverloads constructor(
         onComplete = listener
     }
 
-//    private fun checkComplete(state: OtpState) {
-//        if (state.isComplete) {
-//            onComplete?.invoke(state.otp.joinToString(""))
-//        }
-//    }
+
 
     private fun checkComplete(state: OtpState) {
 
